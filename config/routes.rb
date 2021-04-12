@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   
+  #devise_for :users
+  resources :categories
+  resources :accounts
+  resources :tasks
+  resources :books
   get '/products', to: 'products#index'
   get '/products/new', to: 'products#new'
   post '/products', to: 'products#create'
