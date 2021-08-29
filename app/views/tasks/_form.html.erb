@@ -1,0 +1,26 @@
+<% # frozen_string_literal: true %>
+
+<%= simple_form_for(@category) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  
+  <div class="form-inputs">
+    <%= f.input :name, label: t('name') %>
+    <%= f.input :description, label: t('description')%>
+
+    <div id="addParticipants">
+      <%= link_to_add_association f, :participating_users, 'data-association-insertion-node' => 'participants .participants-container', 'data-turbolinks' => false do agregar participante %>
+    </div>
+
+    <div class="participants">
+      <%= f.simple_fields_for :participating_users do |g| %>
+        <%= render 'participating_users_fields', f: g %>
+        <div class="participants-container">
+        </div>
+      <% end %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  </div>
+<% end %>
